@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id              String   @id @default(cuid())
+  orderId         String   @unique
+  amount          Float
+  currency        String   @default("USD")
+  status          String   @default("PENDING")
+  paymentMethod   String?
+  payerEmail      String?
+  description     String?
+  category        String   @default("Uncategorized")
+  categoryReason  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([category])
+}
