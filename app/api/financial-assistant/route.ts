@@ -49,8 +49,7 @@ async function generateGeminiAnswer(
   const genAI = new GoogleGenerativeAI(apiKey);
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-3.8-flash",
-    systemInstruction: `
+model: "gemini-3.5-flash-lite",    systemInstruction: `
 You are PayPilot AI, an intelligent financial assistant for small businesses.
 
 YOUR ROLE:

@@ -126,7 +126,7 @@ export async function GET() {
             const ai = new GoogleGenAI({ apiKey });
 
             const response = await ai.models.generateContent({
-                model: "gemini-3.8-flash",
+               model: "gemini-3.5-flash-lite",
                 contents: `
 You are PayPilot AI, a financial insights assistant.
 
@@ -222,9 +222,7 @@ Rules:
             // Avoid repeatedly calling Gemini after errors
             geminiRetryAfter = Date.now() + RETRY_DELAY;
 
-            console.warn(
-                "Gemini temporarily unavailable. Using basic insights."
-            );
+            console.error("Gemini API actual error:", aiError);
 
             return NextResponse.json({
                 success: true,
