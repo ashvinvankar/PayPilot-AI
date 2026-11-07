@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 
 export async function POST() {
@@ -31,10 +32,15 @@ export async function POST() {
         const tokenData = await tokenResponse.json();
 
         if (!tokenResponse.ok) {
+            console.error("PayPal Authentication Error:", tokenData);
             throw new Error("PayPal authentication failed");
         }
 
         // Step 2: Create PayPal order
+        const appUrl =
+            process.env.NEXT_PUBLIC_APP_URL ||
+            "https://paypiloter.netlify.app";
+
         const orderResponse = await fetch(
             `${baseUrl}/v2/checkout/orders`,
             {
@@ -60,10 +66,8 @@ export async function POST() {
                             experience_context: {
                                 brand_name: "PayPilot AI",
                                 user_action: "PAY_NOW",
-                                return_url:
-                                    "http://localhost:3000/payment/success",
-                                cancel_url:
-                                    "http://localhost:3000/payment/cancel",
+                                return_url: `${appUrl}/payment/success`,
+                                cancel_url: `${appUrl}/payment/cancel`,
                             },
                         },
                     },
