@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-"build": "prisma generate && next build",    "start": "next start",
+    "build": "prisma generate && next build",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
     "@google/generative-ai": "^0.24.1",
+    "@neondatabase/serverless": "^1.2.0",
     "@paypal/paypal-server-sdk": "^2.5.0",
+    "@prisma/adapter-neon": "^6.19.3",
     "@prisma/client": "^6.19.3",
     "next": "16.4.3",
     "react": "19.3.0",
